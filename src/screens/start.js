@@ -8,7 +8,7 @@ export function mountStart(onPlay, onOpenParent) {
       <button id="play-btn" class="big-btn">Играть</button>
       
       <!-- Скрытая кнопка для родителей -->
-      <div id="parent-gate" class="parent-gate">Настройки для родителей</div>
+      <div id="parent-gate" class="parent-gate">Настройки для родителей (зажмите на 3 сек)</div>
     </div>
   `
 

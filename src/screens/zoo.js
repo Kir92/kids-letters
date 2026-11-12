@@ -3,7 +3,12 @@ import { getProgress } from '../state.js';
 export function mountZoo(onBackToStart) {
   const app = document.querySelector('#app')
   const progress = getProgress();
-  const totalSlots = progress.stickers.length + 3;
+  
+  // Если кубок уже есть, показываем все 34 (33 животных + кубок).
+  // Если нет — показываем животных + 3 пустых места, чтобы был стимул играть.
+  const hasTrophy = progress.stickers.includes('🏆');
+  const totalSlots = hasTrophy ? 34 : progress.stickers.length + 3;
+  
   let slotsHTML = '';
 
   for (let i = 0; i < totalSlots; i++) {

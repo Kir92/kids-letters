@@ -193,34 +193,36 @@ h2.prompt {
   padding-bottom: 40px;
 }
 
+/* --- ЗООПАРК --- */
 .zoo-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  width: 100%;
-  max-width: 400px;
-  flex: 1; /* Сетка забирает все свободное место */
-  overflow-y: auto; /* Включаем скролл, если зверей много */
+  grid-template-columns: repeat(4, 1fr); /* 4 колонки */
+  gap: 10px; /* Чуть уменьшили отступ */
+  width: 90%;
+  max-width: 350px;
+  margin: 0 auto;
   padding: 10px;
-  align-content: start;
+  flex: 1;
+  overflow-y: auto; 
+  align-content: start; 
 }
 
 .zoo-slot {
   width: 100%;
-  aspect-ratio: 1; /* Делаем ячейки идеально квадратными */
+  aspect-ratio: 1 / 1; 
   background: rgba(255, 229, 180, 0.9);
-  border-radius: 20px;
+  border-radius: 15px; /* Чуть меньше скругление */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 50px;
+  font-size: 30px; /* Уменьшили шрифт, чтобы в 4 колонки влезало аккуратно */
   box-shadow: inset 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .zoo-slot.empty {
   background: rgba(240, 240, 240, 0.5);
   box-shadow: none;
-  border: 4px dashed #D0D0D0;
+  border: 3px dashed #D0D0D0;
 }
 
 /* --- РОДИТЕЛЬСКИЙ РАЗДЕЛ --- */

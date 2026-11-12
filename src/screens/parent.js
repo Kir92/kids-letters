@@ -3,7 +3,7 @@ export function mountParent(onBack) {
   
   app.innerHTML = `
     <div class="screen parent-screen">
-      <h1>Для родителей</h1>
+      <h1>Для родителей (зажми на 3 сек)</h1>
       
       <div class="parent-menu">
         <button id="reset-btn" class="parent-btn danger">Сбросить прогресс</button>
