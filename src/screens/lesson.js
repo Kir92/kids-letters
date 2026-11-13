@@ -40,7 +40,7 @@ export function mountLesson(onFinish) {
 
     // Проверяем, есть ли картинка. Если есть — используем тег img, если нет — эмодзи.
     const mediaHTML = currentLetter.image 
-      ? `<img src="${currentLetter.image}" alt="${currentLetter.word}" class="word-image" />`
+      ? `<img src="${currentLetter.image}" alt="" class="word-image" />`
       : `<span class="emoji">${currentLetter.emoji}</span>`;
 
     app.innerHTML = `
@@ -64,7 +64,6 @@ export function mountLesson(onFinish) {
       `<button class="letter-btn" data-letter="${opt}">${opt}</button>`
     ).join('');
 
-    // Сову здесь убрали!
     app.innerHTML = `
       <div class="screen lesson-screen">
         <h2 class="prompt" id="prompt">Найди букву ${currentLetter.char}</h2>
@@ -82,7 +81,7 @@ export function mountLesson(onFinish) {
       btn.addEventListener('click', (e) => {
         if (e.target.dataset.letter === currentLetter.char) {
           markLetterLearned(currentLetter.char);
-          speak('Молодец!')
+          // speak('Молодец!') <-- УДАЛЕНО, чтобы не было двойного голоса
           setTimeout(onFinish, 1000)
         } else {
           e.target.classList.add('shake')
