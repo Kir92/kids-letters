@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
+      version: '1.0.1',
       manifest: {
         name: 'Учим буквы',
         short_name: 'Буквы',
