@@ -220,7 +220,7 @@ h2.prompt {
 .zoo-screen {
   justify-content: space-between;
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 60px; /* Добавили отступ снизу, чтобы кнопка была выше */
 }
 
 .zoo-grid {
@@ -264,6 +264,9 @@ h2.prompt {
   transition: color 0.3s;
   text-align: center;
   width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none; /* Запрещает меню "копировать" на iOS */
 }
 
 .parent-gate:active {
