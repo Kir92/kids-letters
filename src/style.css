@@ -10,7 +10,6 @@
 body {
   font-family: 'Comic Sans MS', 'Nunito', sans-serif;
   background-color: #FFF8E7;
-  /* Паттерн: облачка и звездочки */
   background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20c0-5.5 4.5-10 10-10s10 4.5 10 10c0-5.5 4.5-10 10-10s10 4.5 10 10c0 5.5-4.5 10-10 10H30c-5.5 0-10-4.5-10-10z' fill='%23FFE5B4' fill-opacity='0.4'/%3E%3Ccircle cx='80' cy='80' r='3' fill='%23FFD180' fill-opacity='0.5'/%3E%3Ccircle cx='10' cy='80' r='2' fill='%23FFD180' fill-opacity='0.5'/%3E%3C/svg%3E");
   background-repeat: repeat;
   color: #4A4A4A;
@@ -39,6 +38,7 @@ body {
   padding: 20px;
   text-align: center;
   height: 100%;
+  position: relative; /* ВАЖНО: чтобы сова в углу привязалась к экрану */
 }
 
 /* --- СТАРТОВЫЙ ЭКРАН --- */
@@ -71,7 +71,7 @@ h1 {
   box-shadow: 0 8px 0 #D98E2D;
   cursor: pointer;
   transition: transform 0.1s, box-shadow 0.1s;
-  flex-shrink: 0; /* Кнопка не сжимается */
+  flex-shrink: 0;
 }
 
 .big-btn:active {
@@ -80,6 +80,15 @@ h1 {
 }
 
 /* --- ЭКРАН УРОКА (БУКВА) --- */
+.owl-corner {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 50px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .letter-display {
   font-size: 150px;
   font-weight: bold;
@@ -87,6 +96,12 @@ h1 {
   line-height: 1;
   margin: 20px 0;
   text-shadow: 4px 4px 0 rgba(255, 255, 255, 0.8);
+  animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Анимация выпрыгивания */
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .word-card {
@@ -188,16 +203,15 @@ h2.prompt {
 
 /* --- ЗООПАРК --- */
 .zoo-screen {
-  justify-content: space-between; /* Заголовок сверху, кнопка снизу */
+  justify-content: space-between;
   padding-top: 40px;
   padding-bottom: 40px;
 }
 
-/* --- ЗООПАРК --- */
 .zoo-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 колонки */
-  gap: 10px; /* Чуть уменьшили отступ */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   width: 90%;
   max-width: 350px;
   margin: 0 auto;
@@ -211,11 +225,11 @@ h2.prompt {
   width: 100%;
   aspect-ratio: 1 / 1; 
   background: rgba(255, 229, 180, 0.9);
-  border-radius: 15px; /* Чуть меньше скругление */
+  border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px; /* Уменьшили шрифт, чтобы в 4 колонки влезало аккуратно */
+  font-size: 30px;
   box-shadow: inset 0 4px 10px rgba(0,0,0,0.1);
 }
 
@@ -229,11 +243,13 @@ h2.prompt {
 .parent-gate {
   position: absolute;
   bottom: 20px;
-  font-size: 14px;
+  font-size: 12px;
   color: #B0B0B0;
   cursor: pointer;
   padding: 10px;
   transition: color 0.3s;
+  text-align: center;
+  width: 100%;
 }
 
 .parent-gate:active {
@@ -242,7 +258,13 @@ h2.prompt {
 
 .parent-screen {
   justify-content: flex-start;
-  padding-top: 60px;
+  padding-top: 40px;
+}
+
+.parent-screen h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #FF8C00;
 }
 
 .parent-menu {

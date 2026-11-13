@@ -40,7 +40,7 @@ export function mountLesson(onFinish) {
 
     app.innerHTML = `
       <div class="screen lesson-screen">
-        <div class="owl">🦉</div>
+        <div class="owl-corner">🦉</div>
         <div class="letter-display">${currentLetter.char}</div>
         <div class="word-card">
           <span class="emoji">${currentLetter.emoji}</span>
@@ -59,20 +59,17 @@ export function mountLesson(onFinish) {
       `<button class="letter-btn" data-letter="${opt}">${opt}</button>`
     ).join('');
 
-    // Если проблемная буква, добавляем подсказку-звук
-    const promptText = currentLetter.isProblem ? `Найди букву ${currentLetter.char}` : `Найди букву ${currentLetter.char}`;
-
+    // Сову здесь убрали!
     app.innerHTML = `
       <div class="screen lesson-screen">
-        <div class="owl">🦉</div>
-        <h2 class="prompt" id="prompt">${promptText}</h2>
+        <h2 class="prompt" id="prompt">Найди букву ${currentLetter.char}</h2>
         <div class="game-options">
           ${buttonsHTML}
         </div>
       </div>
     `
 
-    // Озвучиваем задание. Для проблемных букв просто называем букву.
+    // Озвучиваем задание
     setTimeout(() => speak(`Найди букву ${currentLetter.char}`), 300)
 
     const buttons = document.querySelectorAll('.letter-btn')
