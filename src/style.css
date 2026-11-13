@@ -255,7 +255,7 @@ h2.prompt {
 }
 
 .parent-gate {
-  margin-top: 30px; /* Отступ от кнопки "Играть" */
+  margin-top: 20px; /* Отступ 0.5 см от кнопки */
   font-size: 14px;
   color: #B0B0B0;
   cursor: pointer;
@@ -263,12 +263,10 @@ h2.prompt {
   transition: color 0.3s;
   text-align: center;
   
-  /* Запрещаем выделение текста */
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
 }
-
 .parent-gate:active {
   color: #FF8C00;
 }
