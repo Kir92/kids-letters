@@ -127,6 +127,12 @@ h1 {
   align-items: center;
   line-height: 1;
 }
+.word-card .word-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain; /* Картинка впишется в квадрат */
+  animation: pulse-image 2s infinite ease-in-out; /* Добавили анимацию */
+}
 
 .word-card .word {
   font-size: 32px;
@@ -248,10 +254,9 @@ h2.prompt {
   border: 3px dashed #D0D0D0;
 }
 
-/* --- РОДИТЕЛЬСКИЙ РАЗДЕЛ --- */
 .parent-gate {
   position: absolute;
-  bottom: 20px;
+  bottom: 60px; /* Было 20px, подняли выше */
   font-size: 12px;
   color: #B0B0B0;
   cursor: pointer;
@@ -312,4 +317,10 @@ h2.prompt {
 
 .parent-btn.danger:active {
   box-shadow: 0 0 0 #FFCDD2;
+}
+
+/* Анимация "дыхания" для картинки */
+@keyframes pulse-image {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); } /* Увеличивается на 10% */
 }

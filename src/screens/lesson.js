@@ -38,12 +38,17 @@ export function mountLesson(onFinish) {
       return;
     }
 
+    // Проверяем, есть ли картинка. Если есть — используем тег img, если нет — эмодзи.
+    const mediaHTML = currentLetter.image 
+      ? `<img src="${currentLetter.image}" alt="${currentLetter.word}" class="word-image" />`
+      : `<span class="emoji">${currentLetter.emoji}</span>`;
+
     app.innerHTML = `
       <div class="screen lesson-screen">
         <div class="owl-corner">🦉</div>
         <div class="letter-display">${currentLetter.char}</div>
         <div class="word-card">
-          <span class="emoji">${currentLetter.emoji}</span>
+          ${mediaHTML}
           <span class="word">${currentLetter.word}</span>
         </div>
         <button id="next-btn" class="big-btn">Далее</button>

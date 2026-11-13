@@ -1,6 +1,6 @@
 export const letters = [
   // --- ГЛАСНЫЕ ---
-  { id: 'a', char: 'А', word: 'арбуз', emoji: '🍉' },
+  { id: 'a', char: 'А', word: 'арбуз', image: './images/arbuz.png' },
   { id: 'o', char: 'О', word: 'облако', emoji: '☁️' },
   { id: 'u', char: 'У', word: 'утка', emoji: '🦆' },
   { id: 'i', char: 'И', word: 'игрушка', emoji: '🧸' },
