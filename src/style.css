@@ -38,7 +38,7 @@ body {
   padding: 20px;
   text-align: center;
   height: 100%;
-  position: relative; /* ВАЖНО: чтобы сова в углу привязалась к экрану */
+  position: relative;
 }
 
 /* --- СТАРТОВЫЙ ЭКРАН --- */
@@ -96,7 +96,7 @@ h1 {
   line-height: 1;
   margin: 20px 0;
   text-shadow: 4px 4px 0 rgba(255, 255, 255, 0.8);
-  animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Анимация выпрыгивания */
+  animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 @keyframes pop-in {
@@ -106,32 +106,33 @@ h1 {
 
 .word-card {
   display: flex;
-  flex-direction: column; /* Эмодзи сверху, текст снизу */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
   background: rgba(255, 255, 255, 0.9);
-  width: 220px;         /* Фиксированная ширина */
-  height: 220px;        /* Фиксированная высота (идеальный квадрат) */
-  border-radius: 40px;  /* Красивое скругление */
+  width: 220px;
+  height: 220px;
+  border-radius: 40px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   margin-bottom: 40px;
 }
 
 .word-card .emoji {
-  width: 100px;         /* Квадрат для картинки */
+  width: 100px;
   height: 100px;
-  font-size: 80px;      /* Размер эмодзи */
+  font-size: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   line-height: 1;
 }
+
 .word-card .word-image {
   width: 100px;
   height: 100px;
-  object-fit: contain; /* Картинка впишется в квадрат */
-  animation: pulse-image 2s infinite ease-in-out; /* Добавили анимацию */
+  object-fit: contain;
+  animation: pulse-image 2s infinite ease-in-out;
 }
 
 .word-card .word {
@@ -220,7 +221,7 @@ h2.prompt {
 .zoo-screen {
   justify-content: space-between;
   padding-top: 40px;
-  padding-bottom: 60px; /* Добавили отступ снизу, чтобы кнопка была выше */
+  padding-bottom: 60px;
 }
 
 .zoo-grid {
@@ -254,19 +255,20 @@ h2.prompt {
   border: 3px dashed #D0D0D0;
 }
 
+/* --- РОДИТЕЛЬСКИЙ РАЗДЕЛ --- */
 .parent-gate {
-  margin-top: 20px; /* Отступ 0.5 см от кнопки */
+  margin-top: 20px;
   font-size: 14px;
   color: #B0B0B0;
   cursor: pointer;
   padding: 10px;
   transition: color 0.3s;
   text-align: center;
-  
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
 }
+
 .parent-gate:active {
   color: #FF8C00;
 }
@@ -323,5 +325,138 @@ h2.prompt {
 /* Анимация "дыхания" для картинки */
 @keyframes pulse-image {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); } /* Увеличивается на 10% */
+  50% { transform: scale(1.1); }
+}
+
+/* --- МОДАЛЬНОЕ ОКНО ПРИВЕТСТВИЯ --- */
+.intro-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 248, 231, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.intro-modal.hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden; /* Надежно скрывает окно */
+}
+
+.intro-content {
+  background: linear-gradient(180deg, #E0F7FA 0%, #FFF9C4 100%);
+  border: 6px solid #ffffff;
+  padding: 50px 20px;
+  border-radius: 50px;
+  box-shadow: 0 15px 35px rgba(255, 184, 77, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.8);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* --- ДЕКОР ДЛЯ МОДАЛЬНОГО ОКНА --- */
+.deco-sun {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  font-size: 80px;
+  opacity: 0.9;
+  animation: rotate-slow 20s linear infinite;
+}
+
+.deco-star {
+  position: absolute;
+  font-size: 24px;
+  animation: float-star 3s infinite ease-in-out;
+}
+
+.star1 { top: 20%; right: 10%; animation-delay: 0s; }
+.star2 { bottom: 30%; left: 10%; font-size: 30px; animation-delay: 1s; }
+.star3 { top: 60%; right: 15%; font-size: 20px; animation-delay: 2s; }
+
+.intro-owl {
+  font-size: 100px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.intro-content h2 {
+  font-size: 42px;
+  color: #FF6F00;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 0px #fff;
+  position: relative;
+  z-index: 2;
+}
+
+.intro-content p {
+  font-size: 24px;
+  color: #4A4A4A;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Анимации */
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float-star {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-15px) scale(1.2); opacity: 1; }
+}
+
+/* --- БЛОК ДОНАТА --- */
+.donate-block {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  margin: 10px 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.donate-block p {
+  font-size: 14px;
+  color: #4A4A4A;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.donate-qr {
+  width: 150px;
+  height: 150px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  border: 4px solid #FFB84D;
+}
+
+.donate-block .donate-hint {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 0;
+}
+/* --- КОПИРАЙТ --- */
+.copyright {
+  position: absolute;
+  bottom: 15px; /* Прижимаем почти к самому низу */
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #B0B0B0; /* Такой же серый цвет, как у parent-gate */
+  pointer-events: none; /* Чтобы на него нельзя было случайно нажать */
 }
