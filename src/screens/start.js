@@ -1,7 +1,8 @@
+import { startMusic } from '../audio.js'; // Импортируем из нового файла
+
 export function mountStart(onPlay, onOpenParent) {
   const app = document.querySelector('#app')
   
-  // Проверяем, видел ли пользователь приветствие
   const hasSeenIntro = localStorage.getItem('hasSeenIntro');
   
   app.innerHTML = `
@@ -12,16 +13,13 @@ export function mountStart(onPlay, onOpenParent) {
       <button id="play-btn" class="big-btn">Играть</button>
       <div id="parent-gate" class="parent-gate">Настройки для родителей (зажмите на 3 сек)</div>
       
-      <!-- Копирайт -->
       <div class="copyright">
         © 2026 Kir92. Все права защищены.
       </div>
     </div>
 
-    <!-- Модальное окно приветствия (скрываем, если уже видели) -->
     <div id="intro-modal" class="intro-modal ${hasSeenIntro ? 'hidden' : ''}">
       <div class="intro-content">
-        <!-- Декоративные элементы -->
         <div class="deco-sun">☀️</div>
         <div class="deco-star star1">⭐</div>
         <div class="deco-star star2">✨</div>
@@ -35,27 +33,25 @@ export function mountStart(onPlay, onOpenParent) {
     </div>
   `
 
-  // Логика работы модального окна
   const introModal = document.getElementById('intro-modal');
   const introStartBtn = document.getElementById('intro-start-btn');
 
-  // Всю логику приветствия запускаем ТОЛЬКО если пользователь здесь впервые
   if (!hasSeenIntro) {
-    // Озвучка приветствия
     setTimeout(() => {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance('Привет! Я буду учить тебя буквам. Нажми Начать!');
+      const utterance = new SpeechSynthesisUtterance('Привет! меня зовут Умка! Я буду учить тебя буквам. Нажми Начать!');
       utterance.lang = 'ru-RU';
       utterance.rate = 0.9;
       window.speechSynthesis.speak(utterance);
     }, 300);
 
-    // Кнопка "Начать" в модальном окне
     introStartBtn.addEventListener('click', () => {
-      introModal.classList.add('hidden'); // Скрываем окно
-      localStorage.setItem('hasSeenIntro', 'true'); // ЗАПОМИНАЕМ, ЧТО ВИДЕЛИ
+      introModal.classList.add('hidden');
+      localStorage.setItem('hasSeenIntro', 'true');
       
-      // Озвучиваем следующий шаг
+      // Включаем музыку при первом клике
+      startMusic();
+
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance('Нажми Играть!');
       utterance.lang = 'ru-RU';
@@ -63,23 +59,20 @@ export function mountStart(onPlay, onOpenParent) {
     });
   }
 
-  document.getElementById('play-btn').addEventListener('click', onPlay)
+  // Включаем музыку при нажатии на "Играть" (если она еще не играет)
+  document.getElementById('play-btn').addEventListener('click', () => {
+    startMusic();
+    onPlay();
+  })
 
-  // Логика "зажать на 3 секунды" для входа в настройки
+  // Логика зажатия для родителей (без изменений)
   const gate = document.getElementById('parent-gate');
   let pressTimer;
-
   const startPress = (e) => {
     if (e.type === 'touchstart') e.preventDefault();
-    pressTimer = setTimeout(() => {
-      onOpenParent();
-    }, 3000);
+    pressTimer = setTimeout(() => { onOpenParent(); }, 3000);
   };
-
-  const cancelPress = () => {
-    clearTimeout(pressTimer);
-  };
-
+  const cancelPress = () => { clearTimeout(pressTimer); };
   gate.addEventListener('mousedown', startPress);
   gate.addEventListener('mouseup', cancelPress);
   gate.addEventListener('mouseleave', cancelPress);

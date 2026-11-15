@@ -21,7 +21,7 @@ export function mountZoo(onBackToStart) {
 
   app.innerHTML = `
     <div class="screen zoo-screen">
-      <h1>Мой зоопарк</h1>
+      <h1>Собери всех друзей Умки</h1>
       <div class="zoo-grid">
         ${slotsHTML}
       </div>
