@@ -23,12 +23,26 @@ export function mountLesson(onFinish) {
 
   const options = [currentLetter.char, ...wrongLetters].sort(() => Math.random() - 0.5);
 
-  const speak = (text) => {
-    window.speechSynthesis.cancel()
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.lang = 'ru-RU'
-    utterance.rate = 0.9
-    window.speechSynthesis.speak(utterance)
+  // Функция озвучки: пытается включить MP3, если файла нет — говорит робот
+  const speak = (text, audioPath = null) => {
+    window.speechSynthesis.cancel(); // Сбрасываем робота, если он говорил
+
+    if (audioPath) {
+      const audio = new Audio(audioPath);
+      audio.play().catch(e => {
+        // Если файла нет, включаем робота
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ru-RU';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      });
+    } else {
+      // Если путь не передан, сразу робот
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ru-RU';
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
+    }
   }
 
   const renderLearning = () => {
@@ -55,7 +69,11 @@ export function mountLesson(onFinish) {
       </div>
     `
     
-    setTimeout(() => speak(`${currentLetter.char}... ${currentLetter.word}`), 300)
+    // Включаем один файл, где Василиса говорит "А-Арбуз" (если есть)
+    setTimeout(() => {
+      speak(`${currentLetter.char}... ${currentLetter.word}`, `./audio/${currentLetter.id}.mp3`);
+    }, 300);
+    
     document.getElementById('next-btn').addEventListener('click', renderGame)
   }
 
@@ -73,20 +91,21 @@ export function mountLesson(onFinish) {
       </div>
     `
 
-    // Озвучиваем задание
-    setTimeout(() => speak(`Найди букву ${currentLetter.char}`), 300)
+    // Включаем файл "Найди букву А" (если есть)
+    setTimeout(() => {
+      speak(`Найди букву ${currentLetter.char}`, `./audio/${currentLetter.id}_find.mp3`);
+    }, 300);
 
     const buttons = document.querySelectorAll('.letter-btn')
     buttons.forEach(btn => {
       btn.addEventListener('click', (e) => {
         if (e.target.dataset.letter === currentLetter.char) {
           markLetterLearned(currentLetter.char);
-          // speak('Молодец!') <-- УДАЛЕНО, чтобы не было двойного голоса
           setTimeout(onFinish, 1000)
         } else {
           e.target.classList.add('shake')
           setTimeout(() => e.target.classList.remove('shake'), 500)
-          speak('Попробуй еще раз')
+          speak('Попробуй еще раз') // Тут всегда робот
         }
       })
     })

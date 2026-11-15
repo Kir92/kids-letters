@@ -25,11 +25,25 @@ export function mountSessionEnd(onGoToZoo) {
     </div>
   `
 
+  // Озвучка победы
   setTimeout(() => {
-    const utterance = new SpeechSynthesisUtterance(voiceText)
-    utterance.lang = 'ru-RU'
-    window.speechSynthesis.speak(utterance)
-  }, 300)
+    // Если это обычная награда, пытаемся включить praise.mp3
+    if (!isSpecial) {
+      const audio = new Audio('./audio/praise.mp3');
+      audio.play().catch(e => {
+        // Если файла нет, включаем робота
+        console.log('Файл praise.mp3 не найден, включаем робота');
+        const utterance = new SpeechSynthesisUtterance(voiceText);
+        utterance.lang = 'ru-RU';
+        window.speechSynthesis.speak(utterance);
+      });
+    } else {
+      // Если это супер-приз (кубок), пусть говорит робот
+      const utterance = new SpeechSynthesisUtterance(voiceText);
+      utterance.lang = 'ru-RU';
+      window.speechSynthesis.speak(utterance);
+    }
+  }, 300);
 
   document.getElementById('zoo-btn').addEventListener('click', onGoToZoo)
 
