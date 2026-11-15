@@ -508,3 +508,10 @@ h2.prompt {
   pointer-events: none;
   mix-blend-mode: multiply; /* Убирает белый фон */
 }
+
+/* Экспериментальный эффект для Умки, чтобы убрать фон */
+.owl-img, .intro-owl-img, .owl-corner-img {
+  mix-blend-mode: multiply;
+  /* Если белый фон всё еще виден, попробуйте добавить этот фильтр: */
+  /* filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); */
+}
