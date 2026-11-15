@@ -59,7 +59,7 @@ export function mountLesson(onFinish) {
 
     app.innerHTML = `
       <div class="screen lesson-screen">
-        <div class="owl-corner">🦉</div>
+        <img src="./images/owl.png" alt="Сова" class="owl-corner-img" />
         <div class="letter-display">${currentLetter.char}</div>
         <div class="word-card">
           ${mediaHTML}

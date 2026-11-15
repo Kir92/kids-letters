@@ -460,3 +460,51 @@ h2.prompt {
   color: #B0B0B0; /* Такой же серый цвет, как у parent-gate */
   pointer-events: none; /* Чтобы на него нельзя было случайно нажать */
 }
+
+/* --- МАРКИРОВКА ВОЗРАСТА 3+ --- */
+.age-mark {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #FFB84D;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 50%; /* Делает круглым */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 0 #D98E2D; /* Объемная тень, как у кнопок */
+  border: 3px solid white;
+}
+
+/* --- НОВАЯ СОВА (КАРТИНКА) --- */
+.owl-img {
+  width: 180px;
+  height: auto;
+  margin-bottom: 20px;
+  animation: bounce 2s infinite ease-in-out;
+  mix-blend-mode: multiply; /* Убирает белый фон */
+}
+
+.intro-owl-img {
+  width: 120px;
+  height: auto;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
+  mix-blend-mode: multiply; /* Убирает белый фон */
+}
+
+.owl-corner-img {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: auto;
+  opacity: 0.8;
+  pointer-events: none;
+  mix-blend-mode: multiply; /* Убирает белый фон */
+}
