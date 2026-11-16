@@ -1,8 +1,10 @@
-
-
 export function mountParent(onBack) {
   const app = document.querySelector('#app')
   
+  // 1. Скрываем глобальную кнопку музыки на экране родителей
+  const globalMusicBtn = document.getElementById('global-music-btn');
+  if (globalMusicBtn) globalMusicBtn.style.display = 'none';
+
   app.innerHTML = `
     <div class="screen parent-screen">
       <h1>Для родителей</h1>
@@ -56,4 +58,15 @@ export function mountParent(onBack) {
     }
   });
 
+  // 2. Логика кнопки "Назад в игру" (её не хватало!)
+  document.getElementById('back-btn').addEventListener('click', onBack)
+
+  // 3. Возвращаем объект для роутера (это тоже было потеряно)
+  return {
+    unmount: () => { 
+      app.innerHTML = ''; 
+      // Возвращаем кнопку музыки, когда уходим с экрана
+      if (globalMusicBtn) globalMusicBtn.style.display = 'flex'; 
+    }
+  }
 }

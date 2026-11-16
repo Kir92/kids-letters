@@ -1,4 +1,4 @@
-/* --- БАЗОВЫЕ СТИЛИ И ЗИМНИЙ ФОН --- */
+/* --- БАЗОВЫЕ СТИЛИ --- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,15 +9,7 @@
 
 body {
   font-family: 'Comic Sans MS', 'Nunito', sans-serif;
-  background-color: #FFF8E7; /* Запасной цвет, если картинка не загрузится */
-  
-  /* Зимний фон с легким затемнением для читаемости */
-  background-image: linear-gradient(rgba(255, 248, 231, 0.4), rgba(255, 248, 231, 0.4)), url('./images/winter-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  
+  background-color: #FFF8E7; /* Запасной цвет */
   color: #4A4A4A;
   display: flex;
   justify-content: center;
@@ -26,14 +18,34 @@ body {
   overflow: hidden;
 }
 
+/* --- ЗИМНИЙ ФОН (РАБОТАЕТ НА IPHONE) --- */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  
+  /* Путь к картинке. Если .png, поменяйте расширение */
+  background-image: url('./images/winter-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Легкое затемнение, чтобы текст читался. Можно менять 0.4 на 0.2 или 0.6 */
+  background-color: rgba(255, 248, 231, 0.4);
+  background-blend-mode: overlay;
+}
+
 #app {
   width: 100%;
   max-width: 600px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* Легкая подложка, чтобы контент не сливался с пестрым фоном */
-  background-color: rgba(255, 248, 231, 0.2);
+  background-color: transparent; /* Прозрачный фон, чтобы видеть картинку */
 }
 
 .screen {
@@ -177,10 +189,8 @@ h2.prompt {
 
 /* --- ЭКРАН ПОБЕДЫ --- */
 .end-screen {
-  background-color: transparent; /* Убираем желтую плашку */
-  border-radius: 0; /* Убираем скругления */
-  /* Если хотите, чтобы текст был читаемым, можно добавить легкую тень вокруг букв, 
-     но на зимнем фоне и так должно быть неплохо видно */
+  background-color: transparent;
+  border-radius: 0;
 }
 
 .confetti {
@@ -269,13 +279,13 @@ h2.prompt {
 
 .parent-screen {
   justify-content: flex-start;
-  padding: 20px 15px; /* Уменьшили отступы для мобильных */
+  padding: 20px 15px;
   height: 100%;
-  overflow-y: auto; /* Разрешаем скролл, если контент не влезает */
+  overflow-y: auto;
 }
 
 .parent-screen h1 {
-  font-size: 28px; /* Чуть уменьшили заголовок */
+  font-size: 28px;
   margin-bottom: 20px;
   color: #FF8C00;
 }
@@ -283,10 +293,10 @@ h2.prompt {
 .parent-menu {
   display: flex;
   flex-direction: column;
-  gap: 12px; /* Чуть уменьшили расстояние между кнопками */
+  gap: 12px;
   width: 100%;
   max-width: 350px;
-  padding-bottom: 30px; /* Отступ снизу, чтобы кнопка не прилипала */
+  padding-bottom: 30px;
 }
 
 .parent-btn {
@@ -332,7 +342,7 @@ h2.prompt {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(224, 247, 250, 0.9); /* Легкий голубоватый оттенок для зимы */
+  background-color: rgba(224, 247, 250, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -413,21 +423,21 @@ h2.prompt {
 .donate-block {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 20px;
-  padding: 15px; /* Уменьшили внутренние отступы */
+  padding: 15px;
   text-align: center;
   margin: 5px 0;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .donate-block p {
-  font-size: 13px; /* Чуть уменьшили текст */
+  font-size: 13px;
   color: #4A4A4A;
   margin-bottom: 10px;
   line-height: 1.3;
 }
 
 .donate-qr {
-  width: 120px; /* Уменьшили QR-код, чтобы влезал на маленький экран */
+  width: 120px;
   height: 120px;
   border-radius: 15px;
   margin-bottom: 10px;
@@ -473,15 +483,15 @@ h2.prompt {
 
 /* --- НОВЫЙ ПЕРСОНАЖ (УМКА) --- */
 .owl-img {
-  width: 200px; /* Увеличили размер мишки */
+  width: 200px;
   height: auto;
   margin-bottom: 20px;
   animation: bounce 2s infinite ease-in-out;
-  mix-blend-mode: multiply; /* Убирает белый фон, если он есть */
+  mix-blend-mode: multiply;
 }
 
 .intro-owl-img {
-  width: 140px; /* Размер мишки в приветственном окне */
+  width: 140px;
   height: auto;
   margin-bottom: 10px;
   position: relative;
@@ -505,34 +515,19 @@ h2.prompt {
   position: fixed;
   top: -10px;
   color: white;
-  pointer-events: none; /* Снежинки не мешают нажимать кнопки */
-  z-index: 1; /* Позади контента */
+  pointer-events: none;
+  z-index: 1;
   opacity: 0.8;
   text-shadow: 0 0 5px rgba(255,255,255,0.8);
-  
-  /* Применяем новую анимацию парения */
   animation: float-snow linear infinite;
 }
 
-/* Анимация плавного парения (покачивание в стороны) */
 @keyframes float-snow {
-  0% { 
-    transform: translateY(-10px) translateX(0) rotate(0deg); 
-    opacity: 1; 
-  }
-  25% { 
-    transform: translateY(25vh) translateX(20px) rotate(90deg); 
-  }
-  50% { 
-    transform: translateY(50vh) translateX(-20px) rotate(180deg); 
-  }
-  75% { 
-    transform: translateY(75vh) translateX(20px) rotate(270deg); 
-  }
-  100% { 
-    transform: translateY(105vh) translateX(0) rotate(360deg); 
-    opacity: 0.2; 
-  }
+  0% { transform: translateY(-10px) translateX(0) rotate(0deg); opacity: 1; }
+  25% { transform: translateY(25vh) translateX(20px) rotate(90deg); }
+  50% { transform: translateY(50vh) translateX(-20px) rotate(180deg); }
+  75% { transform: translateY(75vh) translateX(20px) rotate(270deg); }
+  100% { transform: translateY(105vh) translateX(0) rotate(360deg); opacity: 0.2; }
 }
 
 /* --- ГЛОБАЛЬНАЯ КНОПКА МУЗЫКИ --- */
@@ -551,7 +546,7 @@ h2.prompt {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 999; /* Поверх всех экранов */
+  z-index: 999;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.1s;
 }
@@ -560,7 +555,6 @@ h2.prompt {
   transform: scale(0.9);
 }
 
-/* Если музыка выключена, кнопка становится бледной */
 .global-music-btn.muted {
   opacity: 0.5;
   border-color: #B0B0B0;
