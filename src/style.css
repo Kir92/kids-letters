@@ -18,15 +18,14 @@ body {
   overflow: hidden;
 }
 
-/* --- ЗИМНИЙ ФОН (РАБОТАЕТ НА IPHONE) --- */
-body::before {
-  content: "";
+/* --- НАДЕЖНЫЙ ЗИМНИЙ ФОН (РАБОТАЕТ НА ВСЕХ УСТРОЙСТВАХ) --- */
+.bg-layer {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Уходит на задний план */
   
   /* Путь к картинке. Если .png, поменяйте расширение */
   background-image: url('./images/winter-bg.jpg');
@@ -34,7 +33,7 @@ body::before {
   background-position: center;
   background-repeat: no-repeat;
   
-  /* Легкое затемнение, чтобы текст читался. Можно менять 0.4 на 0.2 или 0.6 */
+  /* Легкое затемнение, чтобы текст читался */
   background-color: rgba(255, 248, 231, 0.4);
   background-blend-mode: overlay;
 }
@@ -45,7 +44,7 @@ body::before {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: transparent; /* Прозрачный фон, чтобы видеть картинку */
+  background-color: transparent;
 }
 
 .screen {

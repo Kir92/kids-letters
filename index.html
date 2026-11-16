@@ -8,14 +8,14 @@
     <link rel="icon" type="image/png" href="/icons/icon-256.png" />
     
     <!-- Основные мета-теги -->
-    <title>Учим буквы</title>
-    <meta name="description" content="Веселая игра для детей 3-4 лет. Учим буквы и собираем зоопарк!" />
+    <title>Учим буквы с Умкой</title>
+    <meta name="description" content="Зимняя игра для детей 3-4 лет. Учим буквы с полярным мишкой и собираем друзей!" />
     
     <!-- Настройки PWA для телефона -->
     <meta name="theme-color" content="#FFF8E7" />
     <link rel="apple-touch-icon" href="/icons/icon-256.png" />
 
-    <!-- Open Graph / Соцсети (для красивого превью в Telegram) -->
+    <!-- Open Graph / Соцсети -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Учим буквы с Умкой" />
     <meta property="og:description" content="Зимняя игра для детей 3-4 лет. Учим буквы с полярным мишкой и собираем друзей!" />
@@ -27,9 +27,18 @@
     <meta name="twitter:image" content="https://kir92.github.io/kids-letters/preview.png" />
   </head>
   <body>
+    <!-- Слой для фона (нужен для мобильных) -->
+    <div class="bg-layer"></div>
+    
+    <!-- Контейнер для снежинок -->
     <div id="snow-container"></div>
+    
+    <!-- Кнопка музыки -->
     <button id="global-music-btn" class="global-music-btn">🎵</button>
+    
+    <!-- Само приложение -->
     <div id="app"></div>
+    
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
